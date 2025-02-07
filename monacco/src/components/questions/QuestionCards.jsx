@@ -42,7 +42,8 @@ const QuestionGenerator = () => {
     const codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
     const mcqCount = Math.floor(mcqMarks / 1);
-    const coding2Count = Math.floor((codingMarks * 1) / 2);
+    const coding2Count = Math.floor((codingMarks * 0.4) / 2);    
+    const coding5Count = Math.floor((codingMarks * 0.6) / 5);
 
     if (!questions || !questions[difficulty]) {
       alert("Questions not available for this difficulty.");
@@ -51,8 +52,9 @@ const QuestionGenerator = () => {
 
     const mcqQuestions = questions[difficulty].mcq.sort(() => 0.5 - Math.random()).slice(0, mcqCount);
     const coding2Questions = questions[difficulty].coding_2mark.sort(() => 0.5 - Math.random()).slice(0, coding2Count);
+    const coding5Questions = questions[difficulty].coding_5mark.sort(() => 0.5 - Math.random()).slice(0, coding5Count);
 
-    setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: [] });
+    setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
   };
 
   return (
@@ -94,6 +96,44 @@ const QuestionGenerator = () => {
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Coding Questions (2 Marks)</h3>
           {selectedQuestions.coding2.map((q, index) => (
+            <div key={q.id} className="p-2 border rounded mt-2">
+              <p>{index + 1}. {q.question}</p>
+              <button
+                onClick={() => toggleExpandedView(q.id)}
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+              >
+                {expandedQuestion  === q.id ? "Close" : "View"}
+              </button>
+
+              {expandedQuestion === q.id && (
+                <div className="expanded-container mt-2 p-4 border rounded bg-gray-100">
+                  <p><b>Question Details:</b></p>
+                  <p>{q.description}</p>
+                  <br />
+                  <b>Test Cases:</b>
+                  <br />
+                  {q.test_cases.map(
+                    (t,i) => {
+                      <p key={i} >Input:{t.input}<br/>Output:{t.output}</p>
+                    }
+                  )}
+                  Input:{q.test_cases[0].input}<br />
+                  Output:{q.test_cases[0].output} <br />
+                  Output:{output} <br />
+                  
+                  <br /><br />
+                  <Monaco />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+{selectedQuestions.coding5.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">Coding Questions (5 Marks)</h3>
+          {selectedQuestions.coding5.map((q, index) => (
             <div key={q.id} className="p-2 border rounded mt-2">
               <p>{index + 1}. {q.question}</p>
               <button
