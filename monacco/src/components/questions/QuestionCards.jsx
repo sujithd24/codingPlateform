@@ -11,11 +11,10 @@ const QuestionGenerator = () => {
   const [questions, setQuestions] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState({ mcq: [], coding2: [], coding5: [] });
   const [output, setOutput] = useState("");
-  const [showMonaco, setShowMonaco] = useState(false);
 
-  useEffect(() => {
-    setOutput(window.localStorage.getItem("output"));
-  }, []);
+  () => {
+    setOutput(window.localStorage.getItem("output"))
+  }
 
   useEffect(() => {
     fetch("questions.json")
@@ -47,7 +46,8 @@ const QuestionGenerator = () => {
     const codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
     const mcqCount = Math.floor(mcqMarks / 1);
-    const coding2Count = Math.floor((codingMarks * 1) / 2);
+    const coding2Count = Math.floor((codingMarks * 0.4) / 2);    
+    const coding5Count = Math.floor((codingMarks * 0.6) / 5);
 
     if (!questions || !questions[difficulty]) {
       alert("Questions not available for this difficulty.");
@@ -56,8 +56,9 @@ const QuestionGenerator = () => {
 
     const mcqQuestions = questions[difficulty].mcq.sort(() => 0.5 - Math.random()).slice(0, mcqCount);
     const coding2Questions = questions[difficulty].coding_2mark.sort(() => 0.5 - Math.random()).slice(0, coding2Count);
+    const coding5Questions = questions[difficulty].coding_5mark.sort(() => 0.5 - Math.random()).slice(0, coding5Count);
 
-    setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: [] });
+    setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
   };
 
   return (
@@ -114,23 +115,22 @@ const QuestionGenerator = () => {
                   <p>{q.description}</p>
                   <br />
                   <b>Test Cases:</b>
-                  <br />
                   {q.test_cases.map((t, i) => (
-                    <p key={i}>Input: {t.input}<br />Output: {t.output}</p>
+                    <p key={i}>Input: {t.input} <br/> Output: {t.output}</p>
                   ))}
-                  <br />
-                  <b>Constraint:</b> 
-                  <br />
-                  Output: {output} <br />
-
                   <br /><br />
-                  <button
-                    onClick={handleSolveClick}
-                    className="bg-green-500 text-white px-4 py-2 rounded mt-2"
-                  >
-                    Solve
-                  </button>
-                  {showMonaco && <Monaco />}
+                  <br />
+                  {q.test_cases.map(
+                    (t,i) => {
+                      <p key={i} >Input:{t.input}<br/>Output:{t.output}</p>
+                    }
+                  )}
+                  Input:{q.test_cases[0].input}<br />
+                  Output:{q.test_cases[0].output} <br />
+                  Output:{output} <br />
+                  
+                  <br /><br />
+                  <Monaco />
                 </div>
               )}
             </div>
