@@ -11,10 +11,11 @@ const QuestionGenerator = () => {
   const [questions, setQuestions] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState({ mcq: [], coding2: [], coding5: [] });
   const [output, setOutput] = useState("");
+  const [showMonaco, setShowMonaco] = useState(false);
 
-  () => {
-    setOutput(window.localStorage.getItem("output"))
-  }
+  useEffect(() => {
+    setOutput(window.localStorage.getItem("output"));
+  }, []);
 
   useEffect(() => {
     fetch("questions.json")
@@ -25,6 +26,10 @@ const QuestionGenerator = () => {
 
   const toggleExpandedView = (id) => {
     setExpandedQuestion(expandedQuestion === id ? null : id);
+  };
+
+  const handleSolveClick = () => {
+    setShowMonaco(true);
   };
 
   const generateQuestions = () => {
@@ -100,7 +105,7 @@ const QuestionGenerator = () => {
                 onClick={() => toggleExpandedView(q.id)}
                 className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
               >
-                {expandedQuestion  === q.id ? "Close" : "View"}
+                {expandedQuestion === q.id ? "Close" : "View"}
               </button>
 
               {expandedQuestion === q.id && (
@@ -110,17 +115,22 @@ const QuestionGenerator = () => {
                   <br />
                   <b>Test Cases:</b>
                   <br />
-                  {q.test_cases.map(
-                    (t,i) => {
-                      <p key={i} >Input:{t.input}<br/>Output:{t.output}</p>
-                    }
-                  )}
-                  Input:{q.test_cases[0].input}<br />
-                  Output:{q.test_cases[0].output} <br />
-                  Output:{output} <br />
-                  
+                  {q.test_cases.map((t, i) => (
+                    <p key={i}>Input: {t.input}<br />Output: {t.output}</p>
+                  ))}
+                  <br />
+                  <b>Constraint:</b> 
+                  <br />
+                  Output: {output} <br />
+
                   <br /><br />
-                  <Monaco />
+                  <button
+                    onClick={handleSolveClick}
+                    className="bg-green-500 text-white px-4 py-2 rounded mt-2"
+                  >
+                    Solve
+                  </button>
+                  {showMonaco && <Monaco />}
                 </div>
               )}
             </div>

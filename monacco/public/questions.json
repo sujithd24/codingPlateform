@@ -1,9 +1,128 @@
 {
     "easy": {
       "mcq": [
-        { "question": "What is 2 + 2?", "options": ["3", "4", "5", "6"], "answer": "4" },
-        { "question": "Which data type stores a single character in C?", "options": ["int", "char", "float", "double"], "answer": "char" }
-      ],
+        {
+          "question": "What is the correct extension of Python files?",
+          "options": {
+              "a": ".py",
+              "b": ".python",
+              "c": ".pyt",
+              "d": ".pt",
+              "e": ".pyth",
+              "f": ".p"
+          },
+          "answer": "a"
+      },
+      {
+          "question": "How do you create a variable in Python?",
+          "options": {
+              "a": "int x = 5",
+              "b": "x = 5",
+              "c": "declare x = 5",
+              "d": "var x = 5",
+              "e": "let x = 5",
+              "f": "create x = 5"
+          },
+          "answer": "b"
+      },
+      {
+          "question": "Which function is used to get input from the user?",
+          "options": {
+              "a": "input()",
+              "b": "get_input()",
+              "c": "read()",
+              "d": "scanf()",
+              "e": "cin>>",
+              "f": "user_input()"
+          },
+          "answer": "a"
+      },
+      {
+          "question": "What is the output of print(2**3)?",
+          "options": {
+              "a": "6",
+              "b": "8",
+              "c": "9",
+              "d": "16",
+              "e": "4",
+              "f": "None"
+          },
+          "answer": "b"
+      },
+      {
+          "question": "How do you start a comment in Python?",
+          "options": {
+              "a": "//",
+              "b": "/*",
+              "c": "#",
+              "d": "<!--",
+              "e": ";;",
+              "f": "**"
+          },
+          "answer": "c"
+      },
+      {
+          "question": "Which data type is mutable?",
+          "options": {
+              "a": "Tuple",
+              "b": "String",
+              "c": "List",
+              "d": "Integer",
+              "e": "Float",
+              "f": "Boolean"
+          },
+          "answer": "c"
+      },
+      {
+          "question": "What is the output of print(type(\"5\"))?",
+          "options": {
+              "a": "<class \u2019int\u2019>",
+              "b": "<class \u2019str\u2019>",
+              "c": "<class \u2019float\u2019>",
+              "d": "<class \u2019char\u2019>",
+              "e": "<class \u2019object\u2019>",
+              "f": "None"
+          },
+          "answer": "b"
+      },
+      {
+          "question": "Which keyword is used to define a function in Python?",
+          "options": {
+              "a": "func",
+              "b": "def",
+              "c": "function",
+              "d": "declare",
+              "e": "lambda",
+              "f": "method"
+          },
+          "answer": "b"
+      },
+      {
+          "question": "Which of these is not a valid Python data type?",
+          "options": {
+              "a": "int",
+              "b": "float",
+              "c": "string",
+              "d": "boolean",
+              "e": "list",
+              "f": "real"
+          },
+          "answer": "f"
+      },
+      {
+          "question": "What is the output of print(5 // 2)?",
+          "options": {
+              "a": "2.5",
+              "b": "2",
+              "c": "3",
+              "d": "1",
+              "e": "5",
+              "f": "None"
+          },
+          "answer": "b"
+      }
+    ],
+
       "coding_2mark": [
           {
             "id": 1,
@@ -201,8 +320,64 @@
     },
     "medium": {
       "mcq": [
-        { "question": "What is the output of printf(\"%d\", 5.5); in C?", "options": ["5", "5.5", "Error", "Garbage Value"], "answer": "Error" }
-      ],
+        {
+          "question": "What is the output of the following code?\n\nx = [[1, 2], [3, 4]]\ny = x[:]\ny[0][0] = 100\nprint(x[0][0])",
+          "options": ["1", "100", "[100, 2]", "Error", "None", "0"],
+          "answer": "100"
+        },
+        {
+          "question": "What will be the output of the following code?\n\ndef func(a, b=[]):\n  b.append(a)\n  return b\n\nprint(func(1))\nprint(func(2))",
+          "options": ["[1], [2]", "[1], [1, 2]", "[1, 2], [1, 2]", "[2], [2]", "Error", "None"],
+          "answer": "[1], [1, 2]"
+        },
+        {
+          "question": "What does the following code output?\n\nclass A:\n  def __init__(self):\n    self.x = 5\n    self.__y = 10\n\na = A()\nprint(hasattr(a, '_A__y'))",
+          "options": ["True", "False", "10", "Error", "None", "AttributeError"],
+          "answer": "True"
+        },
+        {
+          "question": "What will print(round(0.5)) output in Python?",
+          "options": ["1", "0", "0.5", "Error", "None", "Undefined"],
+          "answer": "1"
+        },
+        {
+          "question": "What is the output of the following code?\n\na = {1, 2, 3}\nb = {3, 4, 5}\nprint(a ^ b)",
+          "options": ["{3}", "{1, 2, 4, 5}", "{1, 2, 3, 4, 5}", "{}", "{4, 5}", "Error"],
+          "answer": "{1, 2, 4, 5}"
+        },
+        {
+          "question": "What is the time complexity of the in operator for lists?",
+          "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)", "O(n log n)", "Undefined"],
+          "answer": "O(n)"
+        },
+        {
+          "question": "What is the result of the following code?\n\nprint((lambda x: x**2)(5))",
+          "options": ["10", "25", "None", "Error", "Function object", "Undefined"],
+          "answer": "25"
+        },
+        {
+          "question": "How do you test if all elements of a list are True?",
+          "options": ["if all(list):", "if list == True:", "if bool(list):", "if any(list):", "if sum(list):", "None"],
+          "answer": "if all(list):"
+        },
+        {
+          "question": "What does sys.getsizeof(1000) return in Python?",
+          "options": ["4", "8", "Platform-dependent", "28", "24", "None"],
+          "answer": "Platform-dependent"
+        },
+        {
+          "question": "What does the @staticmethod decorator do in Python?",
+          "options": [
+            "Makes a method immutable",
+            "Allows a method to access class-level attributes",
+            "Turns a method into a static method",
+            "Converts an instance method into a class method",
+            "Prevents inheritance of the method",
+            "None"
+          ],
+          "answer": "Turns a method into a static method"
+        }
+        ],
       "coding_2mark": [
         {
           "question": "Check for Prime Numbers in a Range",
@@ -780,9 +955,58 @@
       ]
     },
     "hard": {
-      "mcq": [
-        { "question": "Which sorting algorithm has an average-case time complexity of O(n log n)?", "options": ["Bubble Sort", "Quick Sort", "Selection Sort", "Insertion Sort"], "answer": "Quick Sort" }
-      ],
+      "mcq":[
+        {
+          "question": "What is the output of the following code?\n\nx = [[1, 2], [3, 4]]\ny = x[:]\ny[0][0] = 100\nprint(x[0][0])",
+          "options": ["1", "100", "[100, 2]", "Error", "None", "0"],
+          "answer": "100"
+        },
+        {
+          "question": "What will be the output of the following code?\n\ndef func(a, b=[]):\n  b.append(a)\n  return b\nprint(func(1))\nprint(func(2))",
+          "options": ["[1], [2]", "[1], [1, 2]", "[1, 2], [1, 2]", "[2], [2]", "Error", "None"],
+          "answer": "[1], [1, 2]"
+        },
+        {
+          "question": "What does the following code output?\n\nclass A:\n  def __init__(self):\n    self.x = 5\n    self.__y = 10\na = A()\nprint(hasattr(a, '_A__y'))",
+          "options": ["True", "False", "10", "Error", "None", "AttributeError"],
+          "answer": "True"
+        },
+        {
+          "question": "What will print(round(0.5)) output in Python?",
+          "options": ["1", "0", "0.5", "Error", "None", "Undefined"],
+          "answer": "1"
+        },
+        {
+          "question": "What is the output of the following code?\n\na = {1, 2, 3}\nb = {3, 4, 5}\nprint(a ^ b)",
+          "options": ["{3}", "{1, 2, 4, 5}", "{1, 2, 3, 4, 5}", "{}", "{4, 5}", "Error"],
+          "answer": "{1, 2, 4, 5}"
+        },
+        {
+          "question": "What is the time complexity of the in operator for lists?",
+          "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)", "O(n log n)", "Undefined"],
+          "answer": "O(n)"
+        },
+        {
+          "question": "What is the result of the following code?\n\nprint((lambda x: x**2)(5))",
+          "options": ["10", "25", "None", "Error", "Function object", "Undefined"],
+          "answer": "25"
+        },
+        {
+          "question": "How do you test if all elements of a list are True?",
+          "options": ["if all(list):", "if list == True:", "if bool(list):", "if any(list):", "if sum(list):", "None"],
+          "answer": "if all(list):"
+        },
+        {
+          "question": "What does sys.getsizeof(1000) return in Python?",
+          "options": ["4", "8", "Platform-dependent", "28", "24", "None"],
+          "answer": "Platform-dependent"
+        },
+        {
+          "question": "What does the @staticmethod decorator do in Python?",
+          "options": ["Makes a method immutable", "Allows a method to access class-level attributes", "Turns a method into a static method", "Converts an instance method into a class method", "Prevents inheritance of the method", "None"],
+          "answer": "Turns a method into a static method"
+        }
+        ],
       "coding_2mark": [
         {
           "id": 1,
