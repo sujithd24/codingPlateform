@@ -11,6 +11,9 @@ const QuestionGenerator = () => {
   const [questions, setQuestions] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState({ mcq: [], coding2: [], coding5: [] });
 
+
+
+
   useEffect(() => {
     fetch("questions.json")
       .then((res) => res.json())
@@ -33,41 +36,23 @@ const QuestionGenerator = () => {
       return;
     }
 
-    const mcqMarks = Math.round((parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks));
-    const codingMarks = Math.round((parseFloat(codingPercentage) / 100) * parseFloat(totalMarks));
+    const mcqMarks = (parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks);
+    const codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
+
+    const mcqCount = Math.floor(mcqMarks / 1);
+    const coding2Count = Math.floor((codingMarks * 0.4) / 2);    
+    const coding5Count = Math.floor((codingMarks * 0.6) / 5);
 
     if (!questions || !questions[difficulty]) {
       alert("Questions not available for this difficulty.");
       return;
     }
 
-    const mcqQuestions = selectExactMarks(questions[difficulty].mcq, mcqMarks, 1);
-    const coding2Questions = selectExactMarks(questions[difficulty].coding_2mark, Math.floor(codingMarks * 0.4), 2);
-    const coding5Questions = selectExactMarks(questions[difficulty].coding_5mark, Math.ceil(codingMarks * 0.6), 5);
+    const mcqQuestions = questions[difficulty].mcq.sort(() => 0.5 - Math.random()).slice(0, mcqCount);
+    const coding2Questions = questions[difficulty].coding_2mark.sort(() => 0.5 - Math.random()).slice(0, coding2Count);
+    const coding5Questions = questions[difficulty].coding_5mark.sort(() => 0.5 - Math.random()).slice(0, coding5Count);
 
-    const totalSelectedMarks = (mcqQuestions.length * 1) + (coding2Questions.length * 2) + (coding5Questions.length * 5);
-    
-    if (totalSelectedMarks !== parseFloat(totalMarks)) {
-      alert("Unable to generate exact total marks. Adjusting question selection.");
-      return;
-    }
-    
     setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
-  };
-
-  const selectExactMarks = (questionPool, targetMarks, markPerQuestion) => {
-    let selected = [];
-    let total = 0;
-    
-    const shuffled = questionPool.sort(() => 0.5 - Math.random());
-    for (let q of shuffled) {
-      if (total + markPerQuestion <= targetMarks) {
-        selected.push(q);
-        total += markPerQuestion;
-      }
-      if (total === targetMarks) break;
-    }
-    return selected;
   };
 
   return (
@@ -85,6 +70,89 @@ const QuestionGenerator = () => {
         <input className="w-full p-2 border rounded" type="number" placeholder="Coding Percentage" onChange={(e) => setCodingPercentage(e.target.value)} />
         <button className="w-full bg-blue-500 text-white p-2 rounded mt-2" onClick={generateQuestions}>Generate Questions</button>
       </div>
+
+      {selectedQuestions.mcq.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">MCQs</h3>
+          {selectedQuestions.mcq.map((q, index) => (
+            <div key={index} className="p-2 border rounded mt-2">
+              <p>{index + 1}. {q.question}</p>
+              {q.options.map((opt, i) => (
+                <ul className="list-none pl-6" key={i}>
+                  <li>
+                    <input type="radio" id={`option${index}_${i}`} name={`options_${index}`} value={opt} />
+                    <label htmlFor={`option${index}_${i}`}>{opt}</label>
+                  </li>
+                </ul>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {selectedQuestions.coding2.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">Coding Questions (2 Marks)</h3>
+          {selectedQuestions.coding2.map((q, index) => (
+            <div key={q.id} className="p-2 border rounded mt-2">
+              <p>{index + 1}. {q.question}</p>
+              <button
+                onClick={() => toggleExpandedView(q.id)}
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+              >
+                {expandedQuestion  === q.id ? "Close" : "View"}
+              </button>
+
+              {expandedQuestion === q.id && (
+                <div className="expanded-container mt-2 p-4 border rounded bg-gray-100">
+                  <p><b>Question Details:</b></p>
+                  <p>{q.description}</p>
+                  <br />
+                  <b>Test Cases:</b>
+                  {q.test_cases.map((t, i) => (
+                    <p key={i}>Input: {t.input} <br/> Output: {t.output}</p>
+                  ))}
+                  <br /><br />
+                  <br />
+                  <Monaco />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {selectedQuestions.coding5.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">Coding Questions (5 Marks)</h3>
+          {selectedQuestions.coding5.map((q, index) => (
+            <div key={q.id} className="p-2 border rounded mt-2">
+              <p>{index + 1}. {q.question}</p>
+              <button
+                onClick={() => toggleExpandedView(q.id)}
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+              >
+                {expandedQuestion  === q.id ? "Close" : "View"}
+              </button>
+
+              {expandedQuestion === q.id && (
+                <div className="expanded-container mt-2 p-4 border rounded bg-gray-100">
+                  <p><b>Question Details:</b></p>
+                  <p>{q.description}</p>
+                  <br />
+                  <b>Test Cases:</b>
+                  {q.test_cases.map((t, i) => (
+                    <p key={i}>Input: {t.input} <br/> Output: {t.output}</p>
+                  ))}
+                  <br /><br />
+                  <br />
+                  <Monaco />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
