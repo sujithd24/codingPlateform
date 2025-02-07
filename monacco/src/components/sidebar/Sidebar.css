@@ -1,0 +1,69 @@
+.sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  background: rgb(160, 116, 229);
+  color: white;
+  height: 100%; /* Set to 100% to fill the entire viewport */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  margin: 0; /* Remove the top and bottom margin */
+  /* border-radius: 10px; */
+}
+
+
+.profile-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.list:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lists {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.lists:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.logout-section {
+  margin-top: auto;
+}

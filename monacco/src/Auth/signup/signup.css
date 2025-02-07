@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+
+.login-main {
+  display: flex;
+  
+  font-family:system-ui;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+.login-left {
+  flex-grow: 1;
+  height: 100vh;
+  background-color: #E9E9E9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-left img {
+  width: 400px;
+  
+}
+
+.login-right {
+  height: 100vh;
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+.login-right-container {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-logo {
+  align-self: center;
+  padding-top: 80px;
+}
+
+.login-center {
+  margin: auto 0;
+}
+
+.login-logo img {
+  width: 50px;
+}
+
+.login-center h2 {
+  font-size: 40px;
+}
+
+.login-center {
+  text-align: center;
+}
+
+.login-center p {
+  font-weight: 400;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+form input[type='username'],
+form input[type='email'],
+form input[type='password'],
+form input[type='text'] {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 0px;
+  border-bottom: 1px solid black;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.pass-input-div {
+  position: relative;
+}
+
+.pass-input-div svg {
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 35px;
+  cursor: pointer;
+  outline: none;
+}
+
+form button[type='button'] {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.login-center-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.remember-div {
+  display:flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.remember-div label {
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.forgot-pass-link {
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.forgot-pass-link:hover {
+  text-decoration: underline;
+}
+
+.login-center-buttons {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.login-center-buttons button:nth-child(1) {
+  background-color: #b05ce4;
+  color: white;
+  border: 3px solid #b05ce4;
+}
+
+.login-center-buttons button:nth-child(1):hover {
+  color: #333;
+  background-color: white;
+}
+
+.login-center-buttons button:nth-child(2) {
+  background-color: #F0F0F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.login-center-buttons button:nth-child(2) img {
+  width: 30px;
+}
+
+.login-center-buttons button:nth-child(2):hover {
+  background-color: #c4c4c457;
+}
+
+.login-bottom-p {
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 40px;
+}
+
+.login-bottom-p a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-bottom-p a:hover {
+  text-decoration: underline;
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.9em;
+  color: #333;
+}
+
+  .error {
+    color: #e74c3c;
+    font-size: 0.8em;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }

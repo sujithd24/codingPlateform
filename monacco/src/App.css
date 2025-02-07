@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.dashboard {
+  display: flex;
+}
+
+.app {
+  display: flex;
+}
+
+.main-content {
+  width: 100%;
+  padding: 20px;
+  margin-left: 230px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.allContent{
+  display: flex;
+  width: 85%;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+.allCharts{
+  width: 90%;
+}
+
+
+.questionContent{
+  margin-left: 250px;
+}

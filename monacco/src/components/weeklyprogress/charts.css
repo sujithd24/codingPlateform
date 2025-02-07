@@ -1,0 +1,24 @@
+.weekly-progress {
+  display: flex;
+    margin-bottom: 20px;
+    background-color: #f9f9ff;
+    padding-top: 20px;
+    width: 100%;
+    padding-right: 10px;
+    border-radius: 20px;
+    /* border: 2px solid #6b4eff ; */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  }
+  h1{
+    font-family: system-ui;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .chartLable {
+    font-size: 17px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: black;
+  }
+  
