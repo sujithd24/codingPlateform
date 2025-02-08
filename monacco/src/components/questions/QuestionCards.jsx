@@ -1,6 +1,6 @@
 import "./QuestionCards.css";
 import { useState, useEffect } from "react";
-import Monaco from '../../pages/monaco/Monaco';
+import Monaco from "../../pages/monaco/Monaco";
 
 const QuestionGenerator = () => {
   const [expandedQuestion, setExpandedQuestion] = useState(null);
@@ -10,11 +10,6 @@ const QuestionGenerator = () => {
   const [codingPercentage, setCodingPercentage] = useState("");
   const [questions, setQuestions] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState({ mcq: [], coding2: [], coding5: [] });
-  const [output, setOutput] = useState("");
-
-  () => {
-    setOutput(window.localStorage.getItem("output"))
-  }
 
   useEffect(() => {
     fetch("questions.json")
@@ -22,14 +17,6 @@ const QuestionGenerator = () => {
       .then((data) => setQuestions(data))
       .catch((err) => console.error("Error loading questions:", err));
   }, []);
-
-  const toggleExpandedView = (id) => {
-    setExpandedQuestion(expandedQuestion === id ? null : id);
-  };
-
-  const handleSolveClick = () => {
-    setShowMonaco(true);
-  };
 
   const generateQuestions = () => {
     if (!difficulty || !totalMarks || !mcqPercentage || !codingPercentage) {
@@ -46,7 +33,7 @@ const QuestionGenerator = () => {
     const codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
     const mcqCount = Math.floor(mcqMarks / 1);
-    const coding2Count = Math.floor((codingMarks * 0.4) / 2);    
+    const coding2Count = Math.floor((codingMarks * 0.4) / 2);
     const coding5Count = Math.floor((codingMarks * 0.6) / 5);
 
     if (!questions || !questions[difficulty]) {
@@ -77,60 +64,38 @@ const QuestionGenerator = () => {
         <button className="w-full bg-blue-500 text-white p-2 rounded mt-2" onClick={generateQuestions}>Generate Questions</button>
       </div>
 
-      {selectedQuestions.mcq.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-lg font-semibold">MCQs</h3>
-          {selectedQuestions.mcq.map((q, index) => (
-            <div key={index} className="p-2 border rounded mt-2">
-              <p>{index + 1}. {q.question}</p>
-              {q.options.map((opt, i) => (
-                <ul className="list-none pl-6" key={i}>
-                  <li>
-                    <input type="radio" id={`option${index}_${i}`} name={`options_${index}`} value={opt} />
-                    <label htmlFor={`option${index}_${i}`}>{opt}</label>
-                  </li>
-                </ul>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-
       {selectedQuestions.coding2.length > 0 && (
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Coding Questions (2 Marks)</h3>
           {selectedQuestions.coding2.map((q, index) => (
-            <div key={q.id} className="p-2 border rounded mt-2">
-              <p>{index + 1}. {q.question}</p>
+            <div key={index} className="p-2 border rounded mt-2 bg-white shadow-md">
+              <p className="font-medium">{index + 1}. {q.question}</p>
               <button
-                onClick={() => toggleExpandedView(q.id)}
+                onClick={() => setExpandedQuestion(expandedQuestion === index ? null : index)}
                 className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
               >
-                {expandedQuestion === q.id ? "Close" : "View"}
+                {expandedQuestion === index ? "Close" : "View"}
               </button>
 
-              {expandedQuestion === q.id && (
-                <div className="expanded-container mt-2 p-4 border rounded bg-gray-100">
+              {expandedQuestion === index && (
+                <div className="mt-2 p-4 border rounded bg-gray-100 shadow-inner">
                   <p><b>Question Details:</b></p>
                   <p>{q.description}</p>
                   <br />
+
                   <b>Test Cases:</b>
-                  {q.test_cases.map((t, i) => (
-                    <p key={i}>Input: {t.input} <br/> Output: {t.output}</p>
+                  {q.test_cases.map((t, caseIndex) => (
+                    <p key={caseIndex} className="text-sm text-gray-700">
+                      <b>Input:</b> {JSON.stringify(t.input, null, 2)} <br />
+                      <b>Output:</b> {JSON.stringify(t.output, null, 2)}
+                    </p>
                   ))}
-                  <br /><br />
                   <br />
-                  {q.test_cases.map(
-                    (t,i) => {
-                      <p key={i} >Input:{t.input}<br/>Output:{t.output}</p>
-                    }
-                  )}
-                  Input:{q.test_cases[0].input}<br />
-                  Output:{q.test_cases[0].output} <br />
-                  Output:{output} <br />
-                  
-                  <br /><br />
-                  <Monaco />
+
+                  {/* Open Monaco editor directly inside the expanded question */}
+                  <div className="mt-4">
+                    <Monaco key={`monaco-${index}`} />
+                  </div>
                 </div>
               )}
             </div>

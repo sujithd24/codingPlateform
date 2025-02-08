@@ -380,6 +380,7 @@
         ],
       "coding_2mark": [
         {
+          "id": 1,
           "question": "Check for Prime Numbers in a Range",
           "description": "Write a Python program to find all prime numbers in a given range.",
           "test_cases": [
@@ -398,6 +399,7 @@
           ]
       },
       {
+        "id": 2,
           "question": "Check if Two Strings are Anagrams",
           "description": "Write a Python program to check if two strings are anagrams.",
           "test_cases": [
@@ -418,6 +420,7 @@
           ]
       },
       {
+        "id": 3,
           "question": "Find Factorial Using Recursion",
           "description": "Write a Python program to calculate the factorial of a number using recursion.",
           "test_cases": [
@@ -428,6 +431,7 @@
           ]
       },
       {
+        "id": 4,
           "question": "Merge Two Sorted Lists",
           "description": "Write a Python program to merge two sorted lists into one sorted list.",
           "test_cases": [
@@ -456,6 +460,7 @@
           ]
       },
       {
+        "id": 5,
           "question": "Fibonacci Sequence Using Recursion",
           "description": "Write a Python program to print the Fibonacci sequence up to n terms using recursion.",
           "test_cases": [
@@ -473,6 +478,7 @@
           ]
       },
       {
+        "id": 6,
           "question": "Check if a List is Sorted",
           "description": "Write a Python program to check if a list is sorted in ascending order.",
           "test_cases": [
@@ -497,6 +503,7 @@
           ]
       },
       {
+        "id": 7,
           "question": "Count Frequency of Elements in a List",
           "description": "Write a Python program to count the frequency of each element in a list.",
           "test_cases": [
@@ -518,6 +525,7 @@
           ]
       },
       {
+        "id": 8,
           "question": "Reverse Words in a String",
           "description": "Write a Python program to reverse the words in a given string.",
           "test_cases": [
@@ -528,6 +536,7 @@
           ]
       },
       {
+        "id": 9,
           "question": "Find Duplicates in a List",
           "description": "Write a Python program to find all duplicate elements in a list.",
           "test_cases": [
@@ -548,6 +557,7 @@
           ]
       },
       {
+        "id": 10,
           "question": "Find All Subsets of a List",
           "description": "Write a Python program to find all subsets of a given list.",
           "test_cases": [
@@ -573,6 +583,7 @@
           ]
       },
       {
+        "id": 11,
           "question": "Sort a Dictionary by Values",
           "description": "Write a Python program to sort a dictionary by its values.",
           "test_cases": [
@@ -591,6 +602,7 @@
           ]
       },
       {
+        "id": 12,
           "question": "Find Second Largest Element in a List",
           "description": "Write a Python program to find the second largest element in a list.",
           "test_cases": [
@@ -606,6 +618,7 @@
           ]
       },
       {
+        "id": 13,
           "question": "Transpose a Matrix",
           "description": "Write a Python program to transpose a 2D matrix.",
           "test_cases": [
@@ -634,6 +647,7 @@
           ]
       },
       {
+        "id": 14,
           "question": "Count Words in a Sentence",
           "description": "Write a Python program to count the number of words in a sentence.",
           "test_cases": [
@@ -644,6 +658,7 @@
           ]
       },
       {
+        "id": 15,
           "question": "Find Intersection of Two Lists",
           "description": "Write a Python program to find the common elements between two lists.",
           "test_cases": [
@@ -668,6 +683,7 @@
           ]
       },
       {
+        "id": 16,
           "question": "Longest Word in a Sentence",
           "description": "Write a Python program to find the longest word in a sentence.",
           "test_cases": [
@@ -678,6 +694,7 @@
           ]
       },
       {
+        "id": 17,
           "question": "Sum of All Digits in a String",
           "description": "Write a Python program to find the sum of all digits in a string.",
           "test_cases": [
@@ -688,6 +705,7 @@
           ]
       },
       {
+        "id": 18,
           "question": "Flatten a Nested List",
           "description": "You have a list that contains other lists as its elements. The goal is to combine all elements into a single list.",
           "test_cases": [
@@ -712,6 +730,7 @@
           ]
       },
       {
+        "id": 19,
           "question": "Remove None Values from a List",
           "description": "You have a list with None values. You need to remove all occurrences of None.",
           "test_cases": [
@@ -731,7 +750,9 @@
               }
           ]
       },
+      
       {
+        "id": 20,
           "question": "Find the Missing Number in a List",
           "description": "You are given a list that contains numbers from 1 to n, but one number is missing. You need to find the missing number.",
           "test_cases": [
@@ -747,6 +768,7 @@
           ]
       },
       {
+        "id": 21,
           "question": "Reverse Digits of an Integer",
           "description": "You have an integer, and the goal is to reverse its digits.",
           "test_cases": [
@@ -757,6 +779,7 @@
           ]
       },
       {
+        "id": 22,
           "question": "Sort a List of Tuples by the Second Element",
           "description": "You have a list of tuples, and you need to sort them by the second element of each tuple.",
           "test_cases": [
@@ -795,6 +818,7 @@
           ]
       },
       {
+        "id": 23,
           "question": "Find All Permutations of a String",
           "description": "Given a string, find all possible permutations of its characters.",
           "test_cases": [
@@ -812,6 +836,7 @@
           ]
       },
       {
+        "id": 24,
           "question": "Check if a List is a Subset of Another",
           "description": "You have two lists, and you need to check if the first list is a subset of the second list.",
           "test_cases": [
@@ -832,6 +857,7 @@
           ]
       },
       {
+        "id": 25,
           "question": "Rotate a List",
           "description": "You need to rotate a list k times to the right.",
           "test_cases": [
@@ -855,6 +881,7 @@
           ]
       },
       {
+        "id": 26,
           "question": "Remove Duplicates Without Using Set",
           "description": "Given a list with duplicate elements, remove the duplicates without using a set.",
           "test_cases": [
@@ -876,6 +903,7 @@
           ]
       },
       {
+        "id": 27,
           "question": "Group Anagrams",
           "description": "You are given a list of strings. Group the strings into anagrams.",
           "test_cases": [
@@ -906,6 +934,7 @@
           ]
       },
       {
+        "id": 28,
           "question": "Find the GCD of Two Numbers",
           "description": "You need to find the greatest common divisor (GCD) of two numbers.",
           "test_cases": [
@@ -919,6 +948,7 @@
           ]
       },
       {
+        "id": 29,
           "question": "Find All Prime Factors of a Number",
           "description": "You are given a number and need to find all of its prime factors.",
           "test_cases": [
@@ -934,6 +964,7 @@
           ]
       },
       {
+        "id": 30,
           "question": "Binary Search",
           "description": "You have a sorted list and need to find the index of a target number using binary search.",
           "test_cases": [
