@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Monaco from "../../pages/monaco/Monaco";
 
 const QuestionGenerator = () => {
-    const [expandedQuestion, setExpandedQuestion] = useState(null);
+   
     const [difficulty, setDifficulty] = useState("");
     const [totalMarks, setTotalMarks] = useState("");
     const [mcqPercentage, setMcqPercentage] = useState("");
