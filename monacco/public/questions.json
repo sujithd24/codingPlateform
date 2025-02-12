@@ -133,285 +133,250 @@
       }
     ],
     "coding_2mark": [
+  {
+    "id": 11,
+    "question": "Write a function to add two numbers.",
+    "description": "Create a function that takes two numbers as arguments and returns their sum.",
+    "marks": 2,
+    "test_cases": [
       {
-        "id": 11,
-        "question": "Write a function to add two numbers.",
-        "description": "Create a function that takes two numbers as arguments and returns their sum.",
-        "test_cases": [
-          {
-            "input": [
-              5,
-              3
-            ],
-            "output": 8
-          },
-          {
-            "input": [
-              -1,
-              1
-            ],
-            "output": 0
-          }
-        ]
+        "input": [5, 3],
+        "output": 8
       },
       {
-        "id": 12,
-        "question": "Write a function to check if a number is even.",
-        "description": "Create a function that takes an integer as an argument and returns True if it's even, False otherwise.",
-        "test_cases": [
-          {
-            "input": 4,
-            "output": true
-          },
-          {
-            "input": 7,
-            "output": false
-          }
-        ]
-      },
-      {
-        "id": 13,
-        "question": "Write a function to find the length of a string.",
-        "description": "Create a function that takes a string as an argument and returns its length.",
-        "test_cases": [
-          {
-            "input": "hello",
-            "output": 5
-          },
-          {
-            "input": "",
-            "output": 0
-          }
-        ]
-      },
-      {
-        "id": 14,
-        "question": "Write a function to convert Celsius to Fahrenheit.",
-        "description": "Create a function that takes a Celsius temperature as an argument and returns the equivalent Fahrenheit temperature.",
-        "test_cases": [
-          {
-            "input": 0,
-            "output": 32
-          },
-          {
-            "input": 100,
-            "output": 212
-          }
-        ]
-      },
-      {
-        "id": 15,
-        "question": "Write a function to find the maximum of two numbers.",
-        "description": "Create a function that takes two numbers as arguments and returns the larger of the two.",
-        "test_cases": [
-          {
-            "input": [
-              5,
-              3
-            ],
-            "output": 5
-          },
-          {
-            "input": [
-              -1,
-              1
-            ],
-            "output": 1
-          }
-        ]
-      },
-      {
-        "id": 16,
-        "question": "Write a function to reverse a string.",
-        "description": "Create a function that takes a string as an argument and returns its reversed version.",
-        "test_cases": [
-          {
-            "input": "hello",
-            "output": "olleh"
-          },
-          {
-            "input": "world",
-            "output": "dlrow"
-          }
-        ]
-      },
-      {
-        "id": 17,
-        "question": "Write a function to calculate the area of a rectangle.",
-        "description": "Create a function that takes the width and height of a rectangle as arguments and returns its area.",
-        "test_cases": [
-          {
-            "input": [
-              5,
-              4
-            ],
-            "output": 20
-          },
-          {
-            "input": [
-              10,
-              2
-            ],
-            "output": 20
-          }
-        ]
-      },
-      {
-        "id": 18,
-        "question": "Write a function to check if a list is empty.",
-        "description": "Create a function that takes a list as an argument and returns True if it's empty, False otherwise.",
-        "test_cases": [
-          {
-            "input": [],
-            "output": true
-          },
-          {
-            "input": [
-              1,
-              2,
-              3
-            ],
-            "output": false
-          }
-        ]
-      },
-      {
-        "id": 19,
-        "question": "Write a function to find the first element of a list.",
-        "description": "Create a function that takes a list as an argument and returns its first element. Return None if the list is empty.",
-        "test_cases": [
-          {
-            "input": [
-              1,
-              2,
-              3
-            ],
-            "output": 1
-          },
-          {
-            "input": [],
-            "output": null
-          }
-        ]
-      },
-      {
-        "id": 20,
-        "question": "Write a function to add an element to the end of a list.",
-        "description": "Create a function that takes a list and an element as arguments, and adds the element to the end of the list. Return the modified list.",
-        "test_cases": [
-          {
-            "input": [
-              [
-                1,
-                2
-              ],
-              3
-            ],
-            "output": [
-              1,
-              2,
-              3
-            ]
-          },
-          {
-            "input": [
-              [],
-              "hello"
-            ],
-            "output": [
-              "hello"
-            ]
-          }
-        ]
-      }
-    ],
-    "coding_5mark": [
-      {
-        "id": 21,
-        "question": "Write a function to calculate the area of a circle.",
-        "description": "Create a function that takes the radius of a circle as an argument and returns its area (πr²). Use the value of π from the math module.",
-        "test_cases": [
-          {
-            "input": 5,
-            "output": 78.53981633974483
-          },
-          {
-            "input": 10,
-            "output": 314.1592653589793
-          }
-        ]
-      },
-      {
-        "id": 22,
-        "question": "Write a function to check if a year is a leap year.",
-        "description": "Create a function that takes a year as an argument and returns True if it's a leap year, False otherwise.",
-        "test_cases": [
-          {
-            "input": 2020,
-            "output": true
-          },
-          {
-            "input": 2021,
-            "output": false
-          }
-        ]
-      },
-      {
-        "id": 23,
-        "question": "Write a function to generate a multiplication table for a given number.",
-        "description": "Create a function that takes a number as an argument and prints its multiplication table from 1 to 10.",
-        "test_cases": [
-          {
-            "input": 5,
-            "output": "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50"
-          }
-        ]
-      },
-      {
-        "id": 24,
-        "question": "Write a function to find the sum of all numbers in a list.",
-        "description": "Create a function that takes a list of numbers as an argument and returns the sum of all the numbers in the list.",
-        "test_cases": [
-          {
-            "input": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "output": 15
-          },
-          {
-            "input": [
-              -1,
-              1,
-              2
-            ],
-            "output": 2
-          }
-        ]
-      },
-      {
-        "id": 25,
-        "question": "Write a function to check if a string is a palindrome.",
-        "description": "Create a function that takes a string as an argument and returns True if it's a palindrome (reads the same forwards and backward), False otherwise. Ignore spaces and case.",
-        "test_cases": [
-          {
-            "input": "madam",
-            "output": true
-          },
-          {
-            "input": "hello",
-            "output": false
-          },
-          {
-            "input": "A man a plan a canal Panama",
-            "output": true
-          }
-        ]
+        "input": [-1, 1],
+        "output": 0
       }
     ]
+  },
+  {
+    "id": 12,
+    "question": "Write a function to check if a number is even.",
+    "description": "Create a function that takes an integer as an argument and returns True if it's even, False otherwise.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": 4,
+        "output": true
+      },
+      {
+        "input": 7,
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Write a function to find the length of a string.",
+    "description": "Create a function that takes a string as an argument and returns its length.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": "hello",
+        "output": 5
+      },
+      {
+        "input": "",
+        "output": 0
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Write a function to convert Celsius to Fahrenheit.",
+    "description": "Create a function that takes a Celsius temperature as an argument and returns the equivalent Fahrenheit temperature.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": 0,
+        "output": 32
+      },
+      {
+        "input": 100,
+        "output": 212
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "Write a function to find the maximum of two numbers.",
+    "description": "Create a function that takes two numbers as arguments and returns the larger of the two.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [5, 3],
+        "output": 5
+      },
+      {
+        "input": [-1, 1],
+        "output": 1
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Write a function to reverse a string.",
+    "description": "Create a function that takes a string as an argument and returns its reversed version.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": "hello",
+        "output": "olleh"
+      },
+      {
+        "input": "world",
+        "output": "dlrow"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "Write a function to calculate the area of a rectangle.",
+    "description": "Create a function that takes the width and height of a rectangle as arguments and returns its area.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [5, 4],
+        "output": 20
+      },
+      {
+        "input": [10, 2],
+        "output": 20
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Write a function to check if a list is empty.",
+    "description": "Create a function that takes a list as an argument and returns True if it's empty, False otherwise.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [],
+        "output": true
+      },
+      {
+        "input": [1, 2, 3],
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Write a function to find the first element of a list.",
+    "description": "Create a function that takes a list as an argument and returns its first element. Return None if the list is empty.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [1, 2, 3],
+        "output": 1
+      },
+      {
+        "input": [],
+        "output": null
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Write a function to add an element to the end of a list.",
+    "description": "Create a function that takes a list and an element as arguments, and adds the element to the end of the list. Return the modified list.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [[1, 2], 3],
+        "output": [1, 2, 3]
+      },
+      {
+        "input": [[], "hello"],
+        "output": ["hello"]
+      }
+    ]
+  }
+],
+    "coding_5mark": [
+  {
+    "id": 21,
+    "question": "Write a function to calculate the area of a circle.",
+    "description": "Create a function that takes the radius of a circle as an argument and returns its area (πr²). Use the value of π from the math module.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 5,
+        "output": 78.53981633974483
+      },
+      {
+        "input": 10,
+        "output": 314.1592653589793
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "question": "Write a function to check if a year is a leap year.",
+    "description": "Create a function that takes a year as an argument and returns True if it's a leap year, False otherwise.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 2020,
+        "output": true
+      },
+      {
+        "input": 2021,
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "question": "Write a function to generate a multiplication table for a given number.",
+    "description": "Create a function that takes a number as an argument and prints its multiplication table from 1 to 10.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 5,
+        "output": "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "question": "Write a function to find the sum of all numbers in a list.",
+    "description": "Create a function that takes a list of numbers as an argument and returns the sum of all the numbers in the list.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": [1, 2, 3, 4, 5],
+        "output": 15
+      },
+      {
+        "input": [-1, 1, 2],
+        "output": 2
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "question": "Write a function to check if a string is a palindrome.",
+    "description": "Create a function that takes a string as an argument and returns True if it's a palindrome (reads the same forwards and backward), False otherwise. Ignore spaces and case.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": "madam",
+        "output": true
+      },
+      {
+        "input": "hello",
+        "output": false
+      },
+      {
+        "input": "A man a plan a canal Panama",
+        "output": true
+      }
+    ]
+  }
+]
+
   },
   "medium": {
     "mcq": [

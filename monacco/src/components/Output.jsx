@@ -2,11 +2,10 @@ import { createContext, useState } from "react";
 import { Box, Button, Text, Textarea, useToast } from "@chakra-ui/react";
 import { executeCode } from "./api";
 
-export const outputContext = createContext()
-
+export const UserContext = createContext();
 const Output = ({ editorRef, language }) => {
   const toast = useToast();
-  const [output, setOutput] = useState("hi");
+  const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [userInput, setUserInput] = useState(""); // State for user input
@@ -50,7 +49,7 @@ const Output = ({ editorRef, language }) => {
   };
 
   return (
-    <outputContext.Provider value={output} >
+    <UserContext.Provider value={output}>
     <Box w="50%">
       <Text mb={2} fontSize="lg">Output</Text>
       
@@ -80,8 +79,7 @@ const Output = ({ editorRef, language }) => {
 
       </Box>  
     </Box>
-    
-    </outputContext.Provider>
+    </UserContext.Provider>
   );
 };
 
