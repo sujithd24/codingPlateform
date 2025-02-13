@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Text, Textarea, useToast } from "@chakra-ui/react";
 import { executeCode } from "./api";
-
-export const UserContext = createContext([]);
 const Output = ({ editorRef, language, testcases }) => {
   const toast = useToast();
   const [output, setOutput] = useState([]);
