@@ -14,18 +14,12 @@ const QuestionGenerator = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [codeResponses, setCodeResponses] = useState({});
 
-  const navigate = useNavigate();
-
   const handleQuestionClick = (question) => {
-    try {
-      const questionData = encodeURIComponent(JSON.stringify(question));
-      navigate(`/question-detail?data=${questionData}`);
-    } catch (error) {
-      console.error("Error serializing question:", error);
-    }
-  };
-  
-  // Fetch Questions from JSON
+    const questionData = encodeURIComponent(JSON.stringify(question));
+    navigate(`/question-detail?data=${questionData}`);
+};
+
+
   useEffect(() => {
     const loadQuestions = async () => {
       try {
@@ -54,19 +48,18 @@ const QuestionGenerator = () => {
     let mcqMarks = (parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks);
     let codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
-    let availableMcq = questions[difficulty]?.mcq || [];
-    let availableCoding2 = questions[difficulty]?.coding_2mark || [];
-    let availableCoding5 = questions[difficulty]?.coding_5mark || [];
+        // Distribute coding marks: 40% for 2-mark, 60% for 5-mark
+        let coding2Marks = codingMarks * 0.4;
+        let coding5Marks = codingMarks * 0.6;
 
-    let mcqCount = Math.min(Math.floor(mcqMarks / 1), availableMcq.length);
-    let coding2Count = 0, coding5Count = 0;
+    let mcqCount = Math.floor(mcqMarks / 1);
+    let coding2Count = 0;
+    let coding5Count = 0;
 
-    if (availableCoding5.length > 0) {
-      let coding5Marks = codingMarks * 0.6;
-      let coding2Marks = codingMarks * 0.4;
-
-      coding5Count = Math.min(Math.floor(coding5Marks / 5), availableCoding5.length);
-      coding2Count = Math.min(Math.floor(coding2Marks / 2), availableCoding2.length);
+    // Ensure correct distribution of marks (balanced 2-mark & 5-mark questions)
+    if (codingMarks % 7 === 0) {
+      coding5Count = Math.floor(codingMarks / 7);
+      coding2Count = coding5Count;
     } else {
       coding2Count = Math.min(Math.floor(codingMarks / 2), availableCoding2.length);
     }
@@ -75,14 +68,26 @@ const QuestionGenerator = () => {
     const coding2Questions = availableCoding2.sort(() => Math.random() - 0.5).slice(0, coding2Count).map(q => ({ ...q, marks: 2 }));
     const coding5Questions = availableCoding5.sort(() => Math.random() - 0.5).slice(0, coding5Count).map(q => ({ ...q, marks: 5 }));
 
-    setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
-    setSelectedOptions({});
+        setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
+        setSelectedOptions({});
+
+    console.log("Generated Questions:", { mcqQuestions, coding2Questions, coding5Questions });
   };
 
-  // Handle MCQ Option Selection
-  const handleOptionChange = (questionId, optionKey) => {
-    setSelectedOptions({ ...selectedOptions, [questionId]: optionKey });
-  };
+    const handleOptionChange = (questionIndex, optionKey) => {
+        setSelectedOptions({
+            ...selectedOptions,
+            [questionIndex]: optionKey,
+        });
+    };
+
+    const openQuestionInNewTab = (question) => {
+        const questionString = JSON.stringify(question);
+        const newTab = window.open(`/question?data=${encodeURIComponent(questionString)}`, "_blank");
+        if (newTab) {
+            newTab.focus();
+        }
+    };
 
   return (
     <div className="p-4 max-w-xl mx-auto">
@@ -96,6 +101,7 @@ const QuestionGenerator = () => {
           <option value="hard">Hard</option>
         </select>
 
+        {/* Marks Dropdown */}
         <select className="w-full p-2 border rounded" onChange={(e) => setTotalMarks(e.target.value)}>
           <option value="">Select Total Marks</option>
           <option value="25">25</option>
@@ -134,20 +140,42 @@ const QuestionGenerator = () => {
         </div>
       )}
 
-      {/* Coding Questions */}
-      {(selectedQuestions.coding2.length > 0 || selectedQuestions.coding5.length > 0) && (
+            {/* Display 2-mark Coding Questions */}
+            {selectedQuestions.coding2.length > 0 && (
+                <div className="mt-4">
+                    <h3 className="text-lg font-semibold">2 Marks</h3>
+                    {selectedQuestions.coding2.map((q, index) => (
+                        <div key={`coding2-${index}`} className="p-2 border rounded mt-2 bg-white shadow-md">
+                            <p className="font-medium">
+                                {index + 1}. {q.question}
+                            </p>
+                            <button
+                                onClick={() => openQuestionInNewTab(q)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                            >
+                                View
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+      {/* Display Coding Questions */}
+      {selectedQuestions.coding2.concat(selectedQuestions.coding5).length > 0 && (
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Coding Questions</h3>
           {selectedQuestions.coding2.concat(selectedQuestions.coding5).map((q, index) => (
             <div key={`coding-${index}`} className="p-2 border rounded mt-2 bg-white shadow-md">
-              <p className="font-medium">{index + 1}. <b>({q.marks} Marks)</b> {q.question}</p>
+              <p className="font-medium">
+                {index + 1}. <b>({q.marks} Marks - {q.marks === 2 ? "2-Mark Question" : "5-Mark Question"})</b> {q.question}
+              </p>
+              <button 
+  className="bg-blue-500 text-white p-2 rounded mt-2" 
+  onClick={() => handleQuestionClick(q)}
+>
+  View Question
+</button>
 
-              <button
-                className="bg-blue-500 text-white p-2 rounded mt-2"
-                onClick={() => handleQuestionClick(q)}
-              >
-                View Question
-              </button>
 
             </div>
           ))}

@@ -52,97 +52,331 @@
           "f": "None"
         },
         "answer": "b"
+      },
+      {
+        "id": 5,
+        "question": "How do you start a comment in Python?",
+        "options": {
+          "a": "//",
+          "b": "/*",
+          "c": "#",
+          "d": "<!--",
+          "e": ";;",
+          "f": "**"
+        },
+        "answer": "c"
+      },
+      {
+        "id": 6,
+        "question": "Which data type is mutable?",
+        "options": {
+          "a": "Tuple",
+          "b": "String",
+          "c": "List",
+          "d": "Integer",
+          "e": "Float",
+          "f": "Boolean"
+        },
+        "answer": "c"
+      },
+      {
+        "id": 7,
+        "question": "What is the output of print(type(\"5\"))?",
+        "options": {
+          "a": "<class ‘int’>",
+          "b": "<class ‘str’>",
+          "c": "<class ‘float’>",
+          "d": "<class ‘char’>",
+          "e": "<class ‘object’>",
+          "f": "None"
+        },
+        "answer": "b"
+      },
+      {
+        "id": 8,
+        "question": "Which keyword is used to define a function in Python?",
+        "options": {
+          "a": "func",
+          "b": "def",
+          "c": "function",
+          "d": "declare",
+          "e": "lambda",
+          "f": "method"
+        },
+        "answer": "b"
+      },
+      {
+        "id": 9,
+        "question": "What is the purpose of the 'if __name__ == \"__main__\":' statement?",
+        "options": {
+          "a": "It defines the main function.",
+          "b": "It ensures a script only runs if it's the main program.",
+          "c": "It imports the main module.",
+          "d": "It prevents the script from running.",
+          "e": "It defines a conditional import.",
+          "f": "None of the above."
+        },
+        "answer": "b"
+      },
+      {
+        "id": 10,
+        "question": "What is the proper way to open a file for writing in Python?",
+        "options": {
+          "a": "open('file.txt', 'r')",
+          "b": "open('file.txt', 'w')",
+          "c": "open('file.txt', 'a')",
+          "d": "open('file.txt', 'x')",
+          "e": "open('file.txt', 'o')",
+          "f": "open('file.txt', 'wb')"
+        },
+        "answer": "b"
       }
     ],
     "coding_2mark": [
+  {
+    "id": 11,
+    "question": "Write a function to add two numbers.",
+    "description": "Create a function that takes two numbers as arguments and returns their sum.",
+    "marks": 2,
+    "test_cases": [
       {
-        "id": 11,
-        "question": "Write a function to add two numbers.",
-        "description": "Create a function that takes two numbers as arguments and returns their sum.",
-        "test_cases": [
-          {
-            "input": [
-              5,
-              3
-            ],
-            "output": 8
-          },
-          {
-            "input": [
-              -1,
-              1
-            ],
-            "output": 0
-          }
-        ]
+        "input": [5, 3],
+        "output": 8
       },
       {
-        "id": 12,
-        "question": "Write a function to check if a number is even.",
-        "description": "Create a function that takes an integer as an argument and returns True if it's even, False otherwise.",
-        "test_cases": [
-          {
-            "input": 4,
-            "output": true
-          },
-          {
-            "input": 7,
-            "output": false
-          }
-        ]
-      },
-      {
-        "id": 13,
-        "question": "Write a function to find the length of a string.",
-        "description": "Create a function that takes a string as an argument and returns its length.",
-        "test_cases": [
-          {
-            "input": "hello",
-            "output": 5
-          },
-          {
-            "input": "",
-            "output": 0
-          }
-        ]
-      },
-      {
-        "id": 14,
-        "question": "Write a function to convert Celsius to Fahrenheit.",
-        "description": "Create a function that takes a Celsius temperature as an argument and returns the equivalent Fahrenheit temperature.",
-        "test_cases": [
-          {
-            "input": 0,
-            "output": 32
-          },
-          {
-            "input": 100,
-            "output": 212
-          }
-        ]
-      },
-      {
-        "id": 15,
-        "question": "Write a function to find the maximum of two numbers.",
-        "description": "Create a function that takes two numbers as arguments and returns the larger of the two.",
-        "test_cases": [
-          {
-            "input": [
-              5,
-              3
-            ],
-            "output": 5
-          },
-          {
-            "input": [
-              -1,
-              1
-            ],
-            "output": 1
-          }
-        ]
+        "input": [-1, 1],
+        "output": 0
       }
     ]
+  },
+  {
+    "id": 12,
+    "question": "Write a function to check if a number is even.",
+    "description": "Create a function that takes an integer as an argument and returns True if it's even, False otherwise.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": 4,
+        "output": true
+      },
+      {
+        "input": 7,
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Write a function to find the length of a string.",
+    "description": "Create a function that takes a string as an argument and returns its length.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": "hello",
+        "output": 5
+      },
+      {
+        "input": "",
+        "output": 0
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Write a function to convert Celsius to Fahrenheit.",
+    "description": "Create a function that takes a Celsius temperature as an argument and returns the equivalent Fahrenheit temperature.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": 0,
+        "output": 32
+      },
+      {
+        "input": 100,
+        "output": 212
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "Write a function to find the maximum of two numbers.",
+    "description": "Create a function that takes two numbers as arguments and returns the larger of the two.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [5, 3],
+        "output": 5
+      },
+      {
+        "input": [-1, 1],
+        "output": 1
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Write a function to reverse a string.",
+    "description": "Create a function that takes a string as an argument and returns its reversed version.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": "hello",
+        "output": "olleh"
+      },
+      {
+        "input": "world",
+        "output": "dlrow"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "Write a function to calculate the area of a rectangle.",
+    "description": "Create a function that takes the width and height of a rectangle as arguments and returns its area.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [5, 4],
+        "output": 20
+      },
+      {
+        "input": [10, 2],
+        "output": 20
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Write a function to check if a list is empty.",
+    "description": "Create a function that takes a list as an argument and returns True if it's empty, False otherwise.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [],
+        "output": true
+      },
+      {
+        "input": [1, 2, 3],
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Write a function to find the first element of a list.",
+    "description": "Create a function that takes a list as an argument and returns its first element. Return None if the list is empty.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [1, 2, 3],
+        "output": 1
+      },
+      {
+        "input": [],
+        "output": null
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Write a function to add an element to the end of a list.",
+    "description": "Create a function that takes a list and an element as arguments, and adds the element to the end of the list. Return the modified list.",
+    "marks": 2,
+    "test_cases": [
+      {
+        "input": [[1, 2], 3],
+        "output": [1, 2, 3]
+      },
+      {
+        "input": [[], "hello"],
+        "output": ["hello"]
+      }
+    ]
+  }
+],
+    "coding_5mark": [
+  {
+    "id": 21,
+    "question": "Write a function to calculate the area of a circle.",
+    "description": "Create a function that takes the radius of a circle as an argument and returns its area (πr²). Use the value of π from the math module.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 5,
+        "output": 78.53981633974483
+      },
+      {
+        "input": 10,
+        "output": 314.1592653589793
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "question": "Write a function to check if a year is a leap year.",
+    "description": "Create a function that takes a year as an argument and returns True if it's a leap year, False otherwise.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 2020,
+        "output": true
+      },
+      {
+        "input": 2021,
+        "output": false
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "question": "Write a function to generate a multiplication table for a given number.",
+    "description": "Create a function that takes a number as an argument and prints its multiplication table from 1 to 10.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": 5,
+        "output": "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "question": "Write a function to find the sum of all numbers in a list.",
+    "description": "Create a function that takes a list of numbers as an argument and returns the sum of all the numbers in the list.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": [1, 2, 3, 4, 5],
+        "output": 15
+      },
+      {
+        "input": [-1, 1, 2],
+        "output": 2
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "question": "Write a function to check if a string is a palindrome.",
+    "description": "Create a function that takes a string as an argument and returns True if it's a palindrome (reads the same forwards and backward), False otherwise. Ignore spaces and case.",
+    "marks": 5,
+    "test_cases": [
+      {
+        "input": "madam",
+        "output": true
+      },
+      {
+        "input": "hello",
+        "output": false
+      },
+      {
+        "input": "A man a plan a canal Panama",
+        "output": true
+      }
+    ]
+  }
+]
+
   },
   "medium": {
     "mcq": [
@@ -210,6 +444,71 @@
           "f": "Error"
         },
         "answer": "b"
+      },
+      {
+        "id": 6,
+        "question": "What is the time complexity of the in operator for lists?",
+        "options": {
+          "a": "O(1)",
+          "b": "O(n)",
+          "c": "O(log n)",
+          "d": "O(n^2)",
+          "e": "O(n log n)",
+          "f": "Undefined"
+        },
+        "answer": "b"
+      },
+      {
+        "id": 7,
+        "question": "What is the result of the following code?\n\nprint((lambda x: x**2)(5))",
+        "options": {
+          "a": "10",
+          "b": "25",
+          "c": "None",
+          "d": "Error",
+          "e": "Function object",
+          "f": "Undefined"
+        },
+        "answer": "b"
+      },
+      {
+        "id": 8,
+        "question": "How do you test if all elements of a list are True?",
+        "options": {
+          "a": "if all(list):",
+          "b": "if list == True:",
+          "c": "if bool(list):",
+          "d": "if any(list):",
+          "e": "if sum(list):",
+          "f": "None"
+        },
+        "answer": "a"
+      },
+      {
+        "id": 9,
+        "question": "What does sys.getsizeof(1000) return in Python?",
+        "options": {
+          "a": "4",
+          "b": "8",
+          "c": "Platform-dependent",
+          "d": "28",
+          "e": "24",
+          "f": "None"
+        },
+        "answer": "c"
+      },
+      {
+        "id": 10,
+        "question": "What does the @staticmethod decorator do in Python?",
+        "options": {
+          "a": "Makes a method immutable",
+          "b": "Allows a method to access class-level attributes",
+          "c": "Turns a method into a static method",
+          "d": "Converts an instance method into a class method",
+          "e": "Prevents inheritance of the method",
+          "f": "None"
+        },
+        "answer": "c"
       }
     ],
     "coding_2mark": [
@@ -252,6 +551,337 @@
             "output": false
           }
         ]
+      },
+      {
+        "id": 13,
+        "question": "Find Factorial Using Recursion",
+        "description": "Write a Python program to calculate the factorial of a number using recursion.",
+        "test_cases": [
+          {
+            "input": 5,
+            "output": 120
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "question": "Merge Two Sorted Lists",
+        "description": "Write a Python program to merge two sorted lists into one sorted list.",
+        "test_cases": [
+          {
+            "input": [
+              [
+                1,
+                3,
+                5
+              ],
+              [
+                2,
+                4,
+                6
+              ]
+            ],
+            "output": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "question": "Fibonacci Sequence Using Recursion",
+        "description": "Write a Python program to print the Fibonacci sequence up to n terms using recursion.",
+        "test_cases": [
+          {
+            "input": 6,
+            "output": [
+              0,
+              1,
+              1,
+              2,
+              3,
+              5
+            ]
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "question": "Check if a List is Sorted",
+        "description": "Write a Python program to check if a list is sorted in ascending order.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "output": true
+          },
+          {
+            "input": [
+              1,
+              3,
+              2,
+              4
+            ],
+            "output": false
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "question": "Count Frequency of Elements in a List",
+        "description": "Write a Python program to count the frequency of each element in a list.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              2,
+              2,
+              3,
+              3,
+              3
+            ],
+            "output": {
+              "1": 1,
+              "2": 2,
+              "3": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "question": "Reverse Words in a String",
+        "description": "Write a Python program to reverse the words in a given string.",
+        "test_cases": [
+          {
+            "input": "Hello World",
+            "output": "World Hello"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "question": "Find Duplicates in a List",
+        "description": "Write a Python program to find all duplicate elements in a list.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              2,
+              2,
+              3,
+              4,
+              4
+            ],
+            "output": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "question": "Find All Subsets of a List",
+        "description": "Write a Python program to find all subsets of a given list.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              2
+            ],
+            "output": [
+              [],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "question": "Sort a Dictionary by Values",
+        "description": "Write a Python program to sort a dictionary by its values.",
+        "test_cases": [
+          {
+            "input": {
+              "a": 3,
+              "b": 1,
+              "c": 2
+            },
+            "output": {
+              "b": 1,
+              "c": 2,
+              "a": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "question": "Find Second Largest Element in a List",
+        "description": "Write a Python program to find the second largest element in a list.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "output": 3
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "question": "Transpose a Matrix",
+        "description": "Write a Python program to transpose a 2D matrix.",
+        "test_cases": [
+          {
+            "input": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ]
+            ],
+            "output": [
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                4
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "question": "Count Words in a Sentence",
+        "description": "Write a Python program to count the number of words in a sentence.",
+        "test_cases": [
+          {
+            "input": "Python is fun",
+            "output": 3
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "question": "Find Intersection of Two Lists",
+        "description": "Write a Python program to find the common elements between two lists.",
+        "test_cases": [
+          {
+            "input": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                2,
+                3,
+                4
+              ]
+            ],
+            "output": [
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "question": "Longest Word in a Sentence",
+        "description": "Write a Python program to find the longest word in a sentence.",
+        "test_cases": [
+          {
+            "input": "Find the longest word",
+            "output": "longest"
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "question": "Sum of All Digits in a String",
+        "description": "Write a Python program to find the sum of all digits in a string.",
+        "test_cases": [
+          {
+            "input": "abc123",
+            "output": 6
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "question": "Flatten a Nested List",
+        "description": "You have a list that contains other lists as its elements. The goal is to combine all elements into a single list.",
+        "test_cases": [
+          {
+            "input": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ]
+            ],
+            "output": [
+              1,
+              2,
+              3,
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "question": "Remove None Values from a List",
+        "description": "You have a list with None values. You need to remove all occurrences of None.",
+        "test_cases": [
+          {
+            "input": [
+              1,
+              null,
+              2,
+              null,
+              3
+            ],
+            "output": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
       }
     ]
   },
@@ -289,6 +919,39 @@
           "d": "Coroutines and threads are the same thing."
         },
         "answer": "b"
+      },
+      {
+        "id": 8,
+        "question": "What is the purpose of the `async with` statement?",
+        "options": {
+          "a": "It's used to handle asynchronous exceptions.",
+          "b": "It's used to automatically acquire and release resources asynchronously.",
+          "c": "It's used to define an asynchronous context manager.",
+          "d": "All of the above."
+        },
+        "answer": "c"
+      },
+      {
+        "id": 9,
+        "question": "What is the complexity of looking up a key in a hash table?",
+        "options": {
+          "a": "O(1) on average, O(n) in the worst case",
+          "b": "O(log n)",
+          "c": "O(n)",
+          "d": "O(1)"
+        },
+        "answer": "a"
+      },
+      {
+        "id": 10,
+        "question": "What are the differences between processes, threads, and asyncio tasks?",
+        "options": {
+          "a": "Processes have separate memory spaces, threads share memory, asyncio tasks run within a single thread.",
+          "b": "Processes are lightweight, threads are heavyweight, asyncio tasks are the heaviest.",
+          "c": "Processes are only available in Python 3.7+, threads are available in all versions, asyncio tasks are only available in Python 3.5+",
+          "d": "There are no differences; they're all the same."
+        },
+        "answer": "a"
       }
     ],
     "coding_2mark": [
@@ -308,6 +971,24 @@
         "id": 9,
         "question": "Implement a function to find the Longest Common Subsequence.",
         "description": "Write a function to find the LCS between two strings.",
+        "test_cases": []
+      },
+      {
+        "id": 10,
+        "question": "Implement a function to perform matrix multiplication using Strassen's algorithm.",
+        "description": "Write a function to implement matrix multiplication using Strassen's algorithm.",
+        "test_cases": []
+      },
+      {
+        "id": 11,
+        "question": "Implement a function to serialize and deserialize a binary tree.",
+        "description": "Write a function to serialize and deserialize a binary tree to and from a string representation.",
+        "test_cases": []
+      },
+      {
+        "id": 12,
+        "question": "Implement a function to check if a binary tree is a binary search tree (BST).",
+        "description": "Write a function to check if a binary tree is a valid BST.",
         "test_cases": []
       }
     ],
@@ -334,6 +1015,18 @@
         "id": 12,
         "question": "Implement a Bloom Filter.",
         "description": "Write a function to implement a space-efficient probabilistic data structure that is used to test whether an element is a member of a set.",
+        "test_cases": []
+      },
+      {
+        "id": 13,
+        "question": "Implement a function to perform Huffman coding.",
+        "description": "Write a function to compress and decompress a string using Huffman coding.",
+        "test_cases": []
+      },
+      {
+        "id": 14,
+        "question": "Implement a function to find the shortest path in a maze using A* search.",
+        "description": "Write a function to find the shortest path in a maze using the A* search algorithm.",
         "test_cases": []
       }
     ]
