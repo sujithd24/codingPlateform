@@ -1,5 +1,6 @@
 import "./QuestionCards.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Monaco from "../../pages/monaco/Monaco";
 
 const QuestionGenerator = () => {
@@ -13,51 +14,43 @@ const QuestionGenerator = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [codeResponses, setCodeResponses] = useState({});
 
-  
-  
+  const handleQuestionClick = (question) => {
+    const questionData = encodeURIComponent(JSON.stringify(question));
+    navigate(`/question-detail?data=${questionData}`);
+};
+
 
   useEffect(() => {
     const loadQuestions = async () => {
       try {
-        const response = await fetch("questions.json");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        const response = await fetch("/questions.json"); // Ensure it's in 'public' folder
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
         const data = await response.json();
         console.log("Fetched questions:", data);
         setQuestions(data);
       } catch (err) {
         console.error("Error loading questions:", err);
-        alert("Failed to load questions. Check your questions.json file. See console for details.");
+        alert("Failed to load questions. Check your JSON file.");
       }
     };
 
-        loadQuestions();
-    }, []);
+    loadQuestions();
+  }, []);
 
-    const generateQuestions = () => {
-        if (!difficulty) {
-            alert("Please select a difficulty level.");
-            return;
-        }
-        if (!totalMarks || !mcqPercentage || !codingPercentage) {
-            alert("Please fill in all fields.");
-            return;
-        }
+  // Function to Generate Questions
+  const generateQuestions = () => {
+    if (!difficulty) return alert("Please select a difficulty level.");
+    if (!totalMarks || !mcqPercentage || !codingPercentage) return alert("Fill all fields.");
+    if (parseFloat(mcqPercentage) + parseFloat(codingPercentage) !== 100) return alert("Percentages must add up to 100.");
+    if (!questions || !questions[difficulty]) return alert(`Questions not available for "${difficulty}" difficulty.`);
 
-        if (parseFloat(mcqPercentage) + parseFloat(codingPercentage) !== 100) {
-            alert("Percentages must add up to 100.");
-            return;
-        }
+    let mcqMarks = (parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks);
+    let codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
-        if (!questions || !questions[difficulty]) {
-            alert(`Questions not available for the "${difficulty}" difficulty.`);
-            return;
-        }
-
-        let mcqMarks = (parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks);
-        let codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
-
+        // Distribute coding marks: 40% for 2-mark, 60% for 5-mark
+        let coding2Marks = codingMarks * 0.4;
+        let coding5Marks = codingMarks * 0.6;
 
     let mcqCount = Math.floor(mcqMarks / 1);
     let coding2Count = 0;
@@ -68,19 +61,15 @@ const QuestionGenerator = () => {
       coding5Count = Math.floor(codingMarks / 7);
       coding2Count = coding5Count;
     } else {
-      coding5Count = Math.floor(codingMarks / 5);
-      let remainingMarks = codingMarks - coding5Count * 5;
-      coding2Count = Math.floor(remainingMarks / 2);
+      coding2Count = Math.min(Math.floor(codingMarks / 2), availableCoding2.length);
     }
 
-    console.log("Calculated Counts:", { mcqCount, coding2Count, coding5Count });
-
-    const mcqQuestions = (questions[difficulty]?.mcq || []).sort(() => 0.5 - Math.random()).slice(0, mcqCount);
-    let coding2Questions = (questions[difficulty]?.coding_2mark || []).sort(() => 0.5 - Math.random()).slice(0, coding2Count);
-    let coding5Questions = (questions[difficulty]?.coding_5mark || []).sort(() => 0.5 - Math.random()).slice(0, coding5Count);
+    const mcqQuestions = availableMcq.sort(() => Math.random() - 0.5).slice(0, mcqCount);
+    const coding2Questions = availableCoding2.sort(() => Math.random() - 0.5).slice(0, coding2Count).map(q => ({ ...q, marks: 2 }));
+    const coding5Questions = availableCoding5.sort(() => Math.random() - 0.5).slice(0, coding5Count).map(q => ({ ...q, marks: 5 }));
 
         setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
-        
+        setSelectedOptions({});
 
     console.log("Generated Questions:", { mcqQuestions, coding2Questions, coding5Questions });
   };
@@ -103,6 +92,7 @@ const QuestionGenerator = () => {
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Question Generator</h2>
+
       <div className="space-y-2">
         <select className="w-full p-2 border rounded" onChange={(e) => setDifficulty(e.target.value)}>
           <option value="">Select Difficulty</option>
@@ -111,8 +101,15 @@ const QuestionGenerator = () => {
           <option value="hard">Hard</option>
         </select>
 
-       
-        <input className="w-full p-2 border rounded" type="number" placeholder="Total Marks" onChange={(e) => setTotalMarks(e.target.value)} />
+        {/* Marks Dropdown */}
+        <select className="w-full p-2 border rounded" onChange={(e) => setTotalMarks(e.target.value)}>
+          <option value="">Select Total Marks</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="75">75</option>
+          <option value="100">100</option>
+        </select>
+
         <input className="w-full p-2 border rounded" type="number" placeholder="MCQ Percentage" onChange={(e) => setMcqPercentage(e.target.value)} />
         <input className="w-full p-2 border rounded" type="number" placeholder="Coding Percentage" onChange={(e) => setCodingPercentage(e.target.value)} />
 
@@ -121,39 +118,47 @@ const QuestionGenerator = () => {
         </button>
       </div>
 
-            {/* Display MCQ Questions */}
-            {selectedQuestions.mcq.length > 0 && (
+      {/* MCQ Questions */}
+      {selectedQuestions.mcq.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">MCQ Questions</h3>
+          {selectedQuestions.mcq.map((q, index) => (
+            <div key={`mcq-${q.id}`} className="p-2 border rounded mt-2 bg-white shadow-md">
+              <p className="font-medium">{index + 1}. {q.question}</p>
+              <ul id="mcqul">
+                {q.options && Object.entries(q.options).map(([key, value]) => (
+                  <li key={key}>
+                    <label>
+                      <input type="radio" name={`mcq-${q.id}`} value={key} checked={selectedOptions[q.id] === key} onChange={() => handleOptionChange(q.id, key)} />
+                      {key.toUpperCase()}. {value}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+            {/* Display 2-mark Coding Questions */}
+            {selectedQuestions.coding2.length > 0 && (
                 <div className="mt-4">
-                    <h3 className="text-lg font-semibold">MCQ Questions</h3>
-                    {selectedQuestions.mcq.map((q, index) => (
-                        <div key={`mcq-${index}`} className="p-2 border rounded mt-2 bg-white shadow-md">
+                    <h3 className="text-lg font-semibold">2 Marks</h3>
+                    {selectedQuestions.coding2.map((q, index) => (
+                        <div key={`coding2-${index}`} className="p-2 border rounded mt-2 bg-white shadow-md">
                             <p className="font-medium">
                                 {index + 1}. {q.question}
                             </p>
-                            <ul className="list-none pl-0">
-                                {q.options &&
-                                    Object.entries(q.options).map(([key, value]) => (
-                                        <li key={key} className="text-gray-700" style={{ listStyle: "none", display: "block", paddingLeft: "0", marginLeft: "0" }}>
-                                            <label className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name={`mcq-${index}`}
-                                                    value={key}
-                                                    checked={selectedOptions[index] === key}
-                                                    onChange={() => handleOptionChange(index, key)}
-                                                    className="mr-2"
-                                                />
-                                                <b>{key.toUpperCase()}.</b> {value}
-                                            </label>
-                                        </li>
-                                    ))}
-                            </ul>
+                            <button
+                                onClick={() => openQuestionInNewTab(q)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                            >
+                                View
+                            </button>
                         </div>
                     ))}
                 </div>
             )}
-
-         
 
       {/* Display Coding Questions */}
       {selectedQuestions.coding2.concat(selectedQuestions.coding5).length > 0 && (
@@ -164,10 +169,14 @@ const QuestionGenerator = () => {
               <p className="font-medium">
                 {index + 1}. <b>({q.marks} Marks - {q.marks === 2 ? "2-Mark Question" : "5-Mark Question"})</b> {q.question}
               </p>
-              <button className="bg-blue-500 text-white p-1 rounded mt-2" onClick={() => openQuestionInNewTab(q)}>
-                {expandedEditor === index ? "Close Editor" : "View Editor"}
-              </button>
-              {expandedEditor === index && <Monaco value={codeResponses[index] || ""} onChange={(code) => handleCodeChange(index, code)} />}
+              <button 
+  className="bg-blue-500 text-white p-2 rounded mt-2" 
+  onClick={() => handleQuestionClick(q)}
+>
+  View Question
+</button>
+
+
             </div>
           ))}
         </div>

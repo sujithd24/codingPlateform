@@ -17,7 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
                     <Route path="/signup" element={auth ? <Navigate to="/" /> : <SignupPage />} />
-                    <Route path="/question" element={<QuestionDetailPage />} />{" "}
+                    <Route path="/question-detail" element={<QuestionDetailPage />} />
                     {/* Route for the new page, outside the Sidebar */}
                     <Route path="*" element={<PageNotFound />} />
                     <Route path="/" element={auth ? <Sidebar /> : <Navigate to="/login" />}>

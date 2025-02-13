@@ -61,9 +61,12 @@
 }
 
 ul#mcqul {
-  list-style: none;
+  list-style-type: none !important; /* Use !important to override other styles */
   padding: 0;
+  margin: 0;
+  
 }
+
 
 #select,
 #input {

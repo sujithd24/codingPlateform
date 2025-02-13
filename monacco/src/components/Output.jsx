@@ -1,40 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Button, Text, Textarea, useToast } from "@chakra-ui/react";
 import { executeCode } from "./api";
 
-const Output = ({ editorRef, language }) => {
+
+const Output = ({ editorRef, language, testcases }) => {
   const toast = useToast();
+  const [output, setOutput] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [userInput, setUserInput] = useState(""); // State for user input
-  const [output , setOutput] = useState('')
+  const [userInput, setUserInput] = useState("");
+  const [testResults, setTestResults] = useState([]);
+
 
 
   const runCode = async () => {
     const sourceCode = editorRef.current.getValue();
     if (!sourceCode) return;
-
-    // Check if the code likely requires input
-    const requiresInput = sourceCode.includes("scanf") || sourceCode.includes("input");
-
-    if (requiresInput && !userInput.trim()) {  // Only show warning if input is required
+  
+    if (!Array.isArray(testcases)) {
+      console.error("Test cases are not an array:", testcases);
       toast({
-        title: "Input Required",
-        description: "Please enter input before running the code.",
-        status: "warning",
+        title: "Error",
+        description: "Test cases must be an array.",
+        status: "error",
         duration: 4000,
       });
       return;
     }
-
+  
     try {
       setIsLoading(true);
-      const { run: result } = await executeCode(language, sourceCode, requiresInput ? userInput : ""); // Only pass input if needed
-      setOutput(result.output.split("\n"));
-      window.localStorage.setItem("output", result.output);
-      result.stderr ? setIsError(true) : setIsError(false);
+      const results = [];
+  
+      for (const test of testcases) {
+        const inputString = Array.isArray(test.input) ? test.input.join("\n") : test.input;
+        const expectedOutput = Array.isArray(test.output) ? test.output.join("\n") : test.output;
+  
+        const { run: result } = await executeCode(language, sourceCode, inputString);
+        const actualOutput = result.output.trim().toLowerCase();  // Normalize output
+  
+        // Normalize expected output (make it case-insensitive)
+        const normalizedExpected = expectedOutput.toString().trim().toLowerCase();
+  
+        results.push({
+          input: inputString,
+          expected: normalizedExpected,
+          actual: actualOutput,
+          passed: actualOutput === normalizedExpected,
+        });
+      }
+  
+      setTestResults(results);
+      setOutput(results.map(res => res.actual));
+  
+      const allPassed = results.every(res => res.passed);
+      setIsError(!allPassed);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({
         title: "An error occurred.",
         description: error.message || "Unable to run code",
@@ -45,37 +67,41 @@ const Output = ({ editorRef, language }) => {
       setIsLoading(false);
     }
   };
+  
+
 
   return (
-    <Box w="50%">
-      <Text mb={2} fontSize="lg">Output</Text>
-      
-      {/* Input Field for User Input */}
-      <Textarea
-        placeholder="Enter input here (optional if code doesn’t require it)"
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        mb={4}
-      />
+    <UserContext.Provider value={output}>
+      <Box w="50%">
+        <Text mb={2} fontSize="lg">Output</Text>
 
-      <Button variant="outline" colorScheme="green" mb={4} isLoading={isLoading} onClick={runCode}>
-        Run Code
-      </Button>
+        <Textarea
+          placeholder="Enter input here (if needed)"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          mb={4}
+        />
 
-      <Box
-        height="75vh"
-        p={2}
-        color={isError ? "red.400" : ""}
-        border="1px solid"
-        borderRadius={4}
-        borderColor={isError ? "red.500" : "#333"}
-      >
-        {output ? 
-          output.map((line, i) => <Text key={i}>{line}</Text>)
-          : 'Click "Run Code" to see the output here'}
+        <Button variant="outline" colorScheme="green" mb={4} isLoading={isLoading} onClick={runCode}>
+          Run Code
+        </Button>
 
-      </Box>  
-    </Box>
+        <Box height="75vh" p={2} border="1px solid" borderRadius={4} borderColor={isError ? "red.500" : "#333"}>
+          {testResults.length > 0 ? (
+            testResults.map((test, index) => (
+              <Box key={index} p={2} mb={2} border="1px solid" borderRadius={4} borderColor={test.passed ? "green.400" : "red.400"}>
+                <Text><b>Input:</b> {test.input}</Text>
+                <Text><b>Expected:</b> {test.expected}</Text>
+                <Text><b>Actual:</b> {test.actual}</Text>
+                <Text color={test.passed ? "green.400" : "red.400"}><b>Status:</b> {test.passed ? "✅ Passed" : "❌ Failed"}</Text>
+              </Box>
+            ))
+          ) : (
+            <Text>Click "Run Code" to see the output here</Text>
+          )}
+        </Box>
+      </Box>
+    </UserContext.Provider>
   );
 };
 
