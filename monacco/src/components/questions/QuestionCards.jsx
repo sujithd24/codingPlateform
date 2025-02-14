@@ -2,7 +2,6 @@ import "./QuestionCards.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Monaco from "../../pages/monaco/Monaco";
-import { Button } from "@chakra-ui/react";
 
 
 const QuestionGenerator = () => {
@@ -79,18 +78,10 @@ const QuestionGenerator = () => {
     const handleOptionChange = (questionIndex, optionKey , questionAns) => {
         setSelectedOptions({
             ...selectedOptions,
-            [`${questionIndex}`]: optionKey,
-            [`${questionIndex}ans`]:questionAns
+            [`${questionIndex}`]: optionKey
         });
         
-      {console.log(selectedOptions,selectedOptions['28'] === selectedOptions['28ans'])}
-        
     };
-
-    const handleSummit = () => {
-        console.log(Object.keys(selectedOptions))
-      
-    }
 
     const openQuestionInNewTab = (question) => {
         const questionString = JSON.stringify(question);
@@ -145,7 +136,7 @@ const QuestionGenerator = () => {
         </div>
       )}
 
-         <Button onClick={handleSummit} >Summit</Button>
+         
 
       {/* Display Coding Questions */}
       {selectedQuestions.coding2.concat(selectedQuestions.coding5).length > 0 && (
