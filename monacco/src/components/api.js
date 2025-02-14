@@ -1,4 +1,4 @@
-import axios from "axios";
+ import axios from "axios";
 import { LANGUAGE_VERSIONS } from "../constants";
 
 const API = axios.create({

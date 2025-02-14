@@ -2,6 +2,8 @@ import "./QuestionCards.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Monaco from "../../pages/monaco/Monaco";
+import { Button } from "@chakra-ui/react";
+
 
 const QuestionGenerator = () => {
   const [expandedEditor, setExpandedEditor] = useState(null);
@@ -13,6 +15,9 @@ const QuestionGenerator = () => {
   const [selectedQuestions, setSelectedQuestions] = useState({ mcq: [], coding2: [], coding5: [] });
   const [selectedOptions, setSelectedOptions] = useState({});
   const [codeResponses, setCodeResponses] = useState({});
+  const [stdMark , setStdMark] = useState(0);
+
+  const navigate = useNavigate()
 
   const handleQuestionClick = (question) => {
     const questionData = encodeURIComponent(JSON.stringify(question));
@@ -48,9 +53,6 @@ const QuestionGenerator = () => {
     let mcqMarks = (parseFloat(mcqPercentage) / 100) * parseFloat(totalMarks);
     let codingMarks = (parseFloat(codingPercentage) / 100) * parseFloat(totalMarks);
 
-        // Distribute coding marks: 40% for 2-mark, 60% for 5-mark
-        let coding2Marks = codingMarks * 0.4;
-        let coding5Marks = codingMarks * 0.6;
 
     let mcqCount = Math.floor(mcqMarks / 1);
     let coding2Count = 0;
@@ -61,25 +63,34 @@ const QuestionGenerator = () => {
       coding5Count = Math.floor(codingMarks / 7);
       coding2Count = coding5Count;
     } else {
-      coding2Count = Math.min(Math.floor(codingMarks / 2), availableCoding2.length);
+      coding2Count = Math.min(Math.floor(codingMarks / 2), questions[difficulty].coding_2mark.length);
     }
 
-    const mcqQuestions = availableMcq.sort(() => Math.random() - 0.5).slice(0, mcqCount);
-    const coding2Questions = availableCoding2.sort(() => Math.random() - 0.5).slice(0, coding2Count).map(q => ({ ...q, marks: 2 }));
-    const coding5Questions = availableCoding5.sort(() => Math.random() - 0.5).slice(0, coding5Count).map(q => ({ ...q, marks: 5 }));
+    const mcqQuestions = questions[difficulty].mcq.sort(() => Math.random() - 0.5).slice(0, mcqCount);
+    const coding2Questions = questions[difficulty].coding_2mark.sort(() => Math.random() - 0.5).slice(0, coding2Count).map(q => ({ ...q, marks: 2 }));
+    const coding5Questions = questions[difficulty].coding_5mark.sort(() => Math.random() - 0.5).slice(0, coding5Count).map(q => ({ ...q, marks: 5 }));
 
         setSelectedQuestions({ mcq: mcqQuestions, coding2: coding2Questions, coding5: coding5Questions });
-        setSelectedOptions({});
+
 
     console.log("Generated Questions:", { mcqQuestions, coding2Questions, coding5Questions });
   };
-
-    const handleOptionChange = (questionIndex, optionKey) => {
+//question with key varuthu
+    const handleOptionChange = (questionIndex, optionKey , questionAns) => {
         setSelectedOptions({
             ...selectedOptions,
-            [questionIndex]: optionKey,
+            [`${questionIndex}`]: optionKey,
+            [`${questionIndex}ans`]:questionAns
         });
+        
+      {console.log(selectedOptions,selectedOptions['28'] === selectedOptions['28ans'])}
+        
     };
+
+    const handleSummit = () => {
+        console.log(Object.keys(selectedOptions))
+      
+    }
 
     const openQuestionInNewTab = (question) => {
         const questionString = JSON.stringify(question);
@@ -101,14 +112,8 @@ const QuestionGenerator = () => {
           <option value="hard">Hard</option>
         </select>
 
-        {/* Marks Dropdown */}
-        <select className="w-full p-2 border rounded" onChange={(e) => setTotalMarks(e.target.value)}>
-          <option value="">Select Total Marks</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="75">75</option>
-          <option value="100">100</option>
-        </select>
+        
+        <input className="w-full p-2 border rounded" type="number" placeholder="Total Mark" onChange={(e) => setTotalMarks(e.target.value)} />
 
         <input className="w-full p-2 border rounded" type="number" placeholder="MCQ Percentage" onChange={(e) => setMcqPercentage(e.target.value)} />
         <input className="w-full p-2 border rounded" type="number" placeholder="Coding Percentage" onChange={(e) => setCodingPercentage(e.target.value)} />
@@ -129,7 +134,7 @@ const QuestionGenerator = () => {
                 {q.options && Object.entries(q.options).map(([key, value]) => (
                   <li key={key}>
                     <label>
-                      <input type="radio" name={`mcq-${q.id}`} value={key} checked={selectedOptions[q.id] === key} onChange={() => handleOptionChange(q.id, key)} />
+                      <input type="radio" name={`mcq-${q.id}`} value={key} checked={selectedOptions[q.id] === key} onChange={() => handleOptionChange(q.id, key , q.answer)} />
                       {key.toUpperCase()}. {value}
                     </label>
                   </li>
@@ -140,25 +145,7 @@ const QuestionGenerator = () => {
         </div>
       )}
 
-            {/* Display 2-mark Coding Questions */}
-            {selectedQuestions.coding2.length > 0 && (
-                <div className="mt-4">
-                    <h3 className="text-lg font-semibold">2 Marks</h3>
-                    {selectedQuestions.coding2.map((q, index) => (
-                        <div key={`coding2-${index}`} className="p-2 border rounded mt-2 bg-white shadow-md">
-                            <p className="font-medium">
-                                {index + 1}. {q.question}
-                            </p>
-                            <button
-                                onClick={() => openQuestionInNewTab(q)}
-                                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-                            >
-                                View
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
+         <Button onClick={handleSummit} >Summit</Button>
 
       {/* Display Coding Questions */}
       {selectedQuestions.coding2.concat(selectedQuestions.coding5).length > 0 && (
