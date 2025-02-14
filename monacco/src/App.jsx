@@ -12,21 +12,18 @@ function App() {
     const auth = window.localStorage.getItem("auth") === "true";
 
     return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
-                    <Route path="/signup" element={auth ? <Navigate to="/" /> : <SignupPage />} />
-                    <Route path="/question-detail" element={<QuestionDetailPage />} />
-                    {/* Route for the new page, outside the Sidebar */}
-                    <Route path="*" element={<PageNotFound />} />
-                    <Route path="/" element={auth ? <Sidebar /> : <Navigate to="/login" />}>
-                        <Route index element={<Dashbord />} />
-                        <Route path="monaco" element={<Question />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
+                <Route path="/signup" element={auth ? <Navigate to="/" /> : <SignupPage />} />
+                <Route path="/question" element={<QuestionDetailPage />} />  {/* ✅ Fixed Route */}
+                <Route path="*" element={<PageNotFound />} />
+                <Route path="/" element={auth ? <Sidebar /> : <Navigate to="/login" />}>
+                    <Route index element={<Dashbord />} />
+                    <Route path="monaco" element={<Question />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
