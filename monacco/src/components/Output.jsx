@@ -1,9 +1,10 @@
 import { createContext } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, Button, Text, Textarea, useToast } from "@chakra-ui/react";
 import { executeCode } from "./api";
 
 export const UserContext = createContext([]);
+
 const Output = ({ editorRef, language, testcases }) => {
   const toast = useToast();
   const [output, setOutput] = useState([]);
@@ -12,12 +13,10 @@ const Output = ({ editorRef, language, testcases }) => {
   const [userInput, setUserInput] = useState("");
   const [testResults, setTestResults] = useState([]);
 
-
-
   const runCode = async () => {
     const sourceCode = editorRef.current.getValue();
     if (!sourceCode) return;
-  
+
     if (!Array.isArray(testcases)) {
       console.error("Test cases are not an array:", testcases);
       toast({
@@ -28,21 +27,22 @@ const Output = ({ editorRef, language, testcases }) => {
       });
       return;
     }
-  
+
     try {
       setIsLoading(true);
       const results = [];
-  
+
       for (const test of testcases) {
         const inputString = Array.isArray(test.input) ? test.input.join("\n") : test.input;
         const expectedOutput = Array.isArray(test.output) ? test.output.join("\n") : test.output;
-  
-        const { run: result } = await executeCode(language, sourceCode, inputString);
-        const actualOutput = result.output.trim().toLowerCase();  // Normalize output
-  
+
+        // Pass user input along with the test case input
+        const { run: result } = await executeCode(language, sourceCode, userInput || inputString);
+        const actualOutput = result.output.trim().toLowerCase(); // Normalize output
+
         // Normalize expected output (make it case-insensitive)
         const normalizedExpected = expectedOutput.toString().trim().toLowerCase();
-  
+
         results.push({
           input: inputString,
           expected: normalizedExpected,
@@ -50,10 +50,10 @@ const Output = ({ editorRef, language, testcases }) => {
           passed: actualOutput === normalizedExpected,
         });
       }
-  
+
       setTestResults(results);
       setOutput(results.map(res => res.actual));
-  
+
       const allPassed = results.every(res => res.passed);
       setIsError(!allPassed);
     } catch (error) {
@@ -68,8 +68,6 @@ const Output = ({ editorRef, language, testcases }) => {
       setIsLoading(false);
     }
   };
-  
-
 
   return (
     <UserContext.Provider value={output}>
